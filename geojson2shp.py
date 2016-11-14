@@ -1,7 +1,11 @@
-# The json module is needed to load the geoJSON file
 import json
-# The shapefile, from pyshp, is needed to construct the shapefile object
-import shapefile
+import shapefile # The shapefile, from pyshp, is needed to construct the shapefile object
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-i", type=str, required=True, dest='input',help='location of geojson file [ex: /path/to/file.geojson]')
+#parser.add_argument("-o", type=str, required=True, dest='output',help='ouput location  [ex: /path/to/outputname]')
+args = parser.parse_args()
 
 class GeoJ:
 
@@ -19,7 +23,7 @@ class GeoJ:
         try:
             self.geoJFile = open(geoJFile)
         except IOError:
-            print "Error: can not find file. Make sure the file name and path are correct"
+            print("Error: can not find file. Make sure the file name and path are correct")
         else:
             try:
                 self.geoJObj = json.load(self.geoJFile)
@@ -125,9 +129,8 @@ class GeoJ:
 ##########################
 
 if __name__ == '__main__':
-
     # Create an object from the GeoJ class
-    gJ = GeoJ('input/lines.geojson')
+    gJ = GeoJ(args.input)
     
     # Creating a shapefile from the geoJSON object
-    gJ.toShp('output/lines')
+    gJ.toShp(args.input)
