@@ -46,3 +46,10 @@ Please keep in mind that the current code expects the common geoJSON format with
     }
   ]
 }
+
+## how to use
+
+`$python3 geojson2shp -i /location/of/your/file.geojson`
+
+## output
+> file.shp, file.shx, file.dbf, file.prj
